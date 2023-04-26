@@ -3,6 +3,7 @@ from ..rpc import Interceptor
 
 
 class LogInterceptor(Interceptor):
+
     def __init__(self):
         self.log = Logger(name='LogInterceptor')
 

@@ -4,6 +4,7 @@ from ..utils import assert_type
 # Patch opencensus to allow 64 bit trace ids
 import opencensus.trace.span_context
 import re
+
 opencensus.trace.span_context.TRACE_ID_PATTERN = re.compile('[0-9a-f]{16}?')
 opencensus.trace.span_context._INVALID_TRACE_ID = '0' * 16
 

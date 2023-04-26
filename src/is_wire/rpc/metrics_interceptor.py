@@ -5,6 +5,7 @@ import time
 
 
 class MetricsInterceptor(Interceptor):
+
     def __init__(self):
         self.log = Logger(name='MetricsInterceptor')
         labels = ("service", "status_code")
@@ -12,7 +13,6 @@ class MetricsInterceptor(Interceptor):
                                 "How long requests took in seconds", labels)
         self.count = Counter("rpc_count_total",
                              "How many requests were processed", labels)
-
 
     def start_server(self, port=8000):
         start_http_server(port)

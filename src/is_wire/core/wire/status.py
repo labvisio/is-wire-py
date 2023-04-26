@@ -21,6 +21,7 @@ class StatusCode(Enum):
 
 
 class Status(object):
+
     def __init__(self, code=StatusCode.UNKNOWN, why=""):
         self._code = None
         self._why = None

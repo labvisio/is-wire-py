@@ -4,6 +4,7 @@ from .wire.conversion import WireV1
 
 
 class Channel(object):
+
     def __init__(self, uri="amqp://guest:guest@localhost:5672", exchange="is"):
         url = urllib.parse.urlparse(uri)
 

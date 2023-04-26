@@ -9,7 +9,8 @@ class ContentType(Enum):
 
 
 def content_type_to_wire(content_type):
-    """ Converts an object of type ContentType to the wire string representation.
+    """ Converts an object of type ContentType to the wire string
+    representation.
     Args:
         content_type (ContentType): enum value
     Returns:

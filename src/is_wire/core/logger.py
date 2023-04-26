@@ -29,7 +29,8 @@ class Logger:
                 'CRITICAL': 'white,bg_red',
             },
             secondary_log_colors={},
-            style='%')
+            style='%',
+        )
 
         self.logger = getLogger(name)
         if len(self.logger.handlers) == 0 and name:

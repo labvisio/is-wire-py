@@ -11,6 +11,7 @@ from .tracing.propagation import TextFormatPropagator
 
 
 class Message(object):
+
     def __init__(self, content=None, reply_to=None, content_type=None):
         """ Creates a new message.
         Args:
@@ -164,8 +165,8 @@ class Message(object):
         self._subscription_id = value
 
     def has_subscription_id(self):
-        """ Returns: True if the property subscription_id of the message is set,
-         False otherwise """
+        """ Returns: True if the property subscription_id of the message is
+        set, False otherwise """
         return bool(self._subscription_id)
 
     # correlation_id
@@ -325,15 +326,19 @@ class Message(object):
         if not self.has_content_type():
             # Default for dict object is to be serialized as json
             # Default for protobuf object is to be binary serialized
-            self.content_type = ContentType.JSON if isDict else ContentType.PROTOBUF
+            if isDict:
+                self.content_type = ContentType.JSON
+            else:
+                self.content_type = ContentType.PROTOBUF
 
         if self.content_type == ContentType.PROTOBUF:
             # SerializeToString returns py2: str, py3: bytes
             self.body = obj.SerializeToString()
         elif self.content_type == ContentType.JSON:
             # MessageToJson returns py2: str, py3: str
-            packed = pb.MessageToJson(
-                obj, indent=0, including_default_value_fields=True)
+            packed = pb.MessageToJson(obj,
+                                      indent=0,
+                                      including_default_value_fields=True)
             if not isinstance(packed, binary_type):
                 self.body = packed.encode('latin')
             else:

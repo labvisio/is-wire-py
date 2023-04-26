@@ -7,6 +7,7 @@ def service_name(context):
 
 
 class TracingInterceptor(Interceptor):
+
     def __init__(self, exporter, span_namer=service_name):
         """ Construct a TracingInterceptor to automatically trace requests
         of a ServiceProvider.
@@ -21,8 +22,8 @@ class TracingInterceptor(Interceptor):
         self.namer = span_namer
 
     def before_call(self, context):
-        self.tracer = Tracer(
-            self.exporter, span_context=context.request.extract_tracing())
+        self.tracer = Tracer(self.exporter,
+                             span_context=context.request.extract_tracing())
         context.addons["tracer"] = self.tracer
         self.span = self.tracer.start_span(name=self.namer(context))
 

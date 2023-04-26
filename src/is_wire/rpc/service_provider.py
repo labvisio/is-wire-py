@@ -71,6 +71,7 @@ class ServiceProvider(object):
             self.serve(self._channel.consume())
 
     def wrap(self, function, request_type, reply_type):
+
         def safe_call(*args):
             try:
                 result = function(*args)
@@ -107,7 +108,8 @@ class ServiceProvider(object):
                         reply.pack(result)
                         reply.status = Status(code=StatusCode.OK)
                 except ParseError:
-                    why = "Expected request type '{}' but received something else"\
+                    why = "Expected request type '{}' but received " \
+                        "something else" \
                         .format(request_type.DESCRIPTOR.full_name)
                     reply.status = Status(StatusCode.FAILED_PRECONDITION, why)
                 except Exception:

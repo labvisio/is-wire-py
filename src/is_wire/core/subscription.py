@@ -2,6 +2,7 @@ from .utils import consumer_id
 
 
 class Subscription(object):
+
     def __init__(self, channel, name=None):
         self._id = consumer_id()
         self._name = self._id if name is None else name

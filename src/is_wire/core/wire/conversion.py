@@ -7,6 +7,7 @@ from six import binary_type
 
 
 class WireV1(object):
+
     @staticmethod
     def from_amqp_message(amqp_message):
         message = Message()
