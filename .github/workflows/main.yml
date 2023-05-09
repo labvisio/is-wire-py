@@ -1,4 +1,4 @@
-name: Tests with tox
+name: Main
 
 on:
   push:
