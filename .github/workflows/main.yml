@@ -39,6 +39,8 @@ jobs:
         python -m pip install tox tox-gh-actions
     - name: Test with tox
       run: tox
+      env:
+        WIRE_RABBITMQ_URI: amqp://guest:guest@127.0.0.1:${{ job.services.rabbitmq.ports['5672'] }}
   
   build-and-publish:
     needs: [test]
