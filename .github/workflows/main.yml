@@ -24,7 +24,7 @@ jobs:
           RABBITMQ_DEFAULT_USER: guest
           RABBITMQ_DEFAULT_PASS: guest
         ports:
-          - 5672
+          - 5672:5672
         options: --health-cmd "rabbitmqctl node_health_check" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
     - name: Checkout
@@ -39,8 +39,6 @@ jobs:
         python -m pip install tox tox-gh-actions
     - name: Test with tox
       run: tox
-      env:
-        WIRE_RABBITMQ_URI: amqp://guest:guest@127.0.0.1:${{ job.services.rabbitmq.ports['5672'] }}
   
   build-and-publish:
     needs: [test]
